@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   Tabs,
   TabsContent,
@@ -25,11 +26,15 @@ import {
   Tag,
   TrendingUp,
   Filter,
+  Upload,
 } from "lucide-react";
 import TopicDistribution from "../data_components/topic-distribution";
 import ArticleList from "../data_components/article-list";
 import RecentArticles from "../data_components/recent-articles";
+import ArticleUploadModal from "../ui_components/article_upload";
+import Tabview from "../ui_components/tab_view";
 export default function HomePage() {
+  const [showModal, setShowModal] = useState(false);
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -47,12 +52,20 @@ export default function HomePage() {
             />
           </div>
           <nav className="flex items-center gap-4">
-            <Button variant="ghost" size="sm">
-              Dashboard
-            </Button>
-            <Button variant="ghost" size="sm">
-              Articles
-            </Button>
+            <div className="relative">
+              <button
+                onClick={() => setShowModal(true)}
+                className="flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow-md transition-all duration-200 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                <Upload className="h-5 w-5" />
+                <span>Upload Article</span>
+              </button>
+              {showModal && (
+                <div className="absolute top-full mt-2 left-0 w-full">
+                  <ArticleUploadModal onClose={() => setShowModal(false)} />
+                </div>
+              )}
+            </div>
           </nav>
         </div>
       </header>
@@ -73,7 +86,7 @@ export default function HomePage() {
                   </Button>
                 </div>
               </div>
-              <Tabs defaultValue="all" className="space-y-4">
+              {/* <Tabs defaultValue="all" className="space-y-4">
                 <div className="flex items-center justify-between">
                   <TabsList>
                     <TabsTrigger value="all">All Articles</TabsTrigger>
@@ -88,15 +101,16 @@ export default function HomePage() {
                   </div>
                 </div>
                 <TabsContent value="all" className="space-y-4">
-                  <ArticleList />
+                  <ArticleList filter="all" />
                 </TabsContent>
-                <TabsContent value="unclassified" className="space-y-4">
+                <TabsContent value="all" className="space-y-4">
                   <ArticleList filter="unclassified" />
                 </TabsContent>
                 <TabsContent value="classified" className="space-y-4">
                   <ArticleList filter="classified" />
                 </TabsContent>
-              </Tabs>
+              </Tabs> */}
+              <Tabview />
             </div>
             <div className="space-y-6">
               <Card>
