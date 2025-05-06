@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useArticles } from "../../data/repos/articles";
 import ArticleCard from "./article_card";
+import { Button } from "./button";
 
 function Tabview() {
   const [filter, setFilter] = useState("All");
@@ -15,14 +16,13 @@ function Tabview() {
           <h1>Upload articles to view</h1>
         ) : (
           categories.map((cat) => (
-            // <option key={cat}>{cat}</option>
             <button
               key={cat}
               className={`${
                 activeTab === cat
-                  ? "border-blue-500 text-blue-500"
+                  ? " text-blue-500"
                   : "text-gray-500 hover:text-blue-500"
-              } rounded-md px-4 py-2 font-bold`}
+              } rounded-md mx-2 px-4  font-bold border border-input hover:bg-accent hover:text-accent-foreground`}
               onClick={() => {
                 setFilter(cat);
                 setActiveTab(cat);
@@ -39,6 +39,7 @@ function Tabview() {
         <h1>No articles found, Kindy upload to view</h1>
       ) : (
         filteredArticles.map((article) => (
+          // </div>
           <div className="mb-4">
             <ArticleCard key={article.id} article={article} />
           </div>

@@ -34,6 +34,7 @@ import RecentArticles from "../data_components/recent-articles";
 import ArticleUploadModal from "../ui_components/article_upload";
 import Tabview from "../ui_components/tab_view";
 import SearchView from "../ui_components/search_view";
+import PieChartComponent from "../ui_components/pie_chart";
 export default function HomePage() {
   const [showModal, setShowModal] = useState(false);
   return (
@@ -70,35 +71,14 @@ export default function HomePage() {
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-                <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm">
-                    <Filter className="mr-2 h-4 w-4" />
-                    Filter
-                  </Button>
-                  <Button>
-                    <Tag className="mr-2 h-4 w-4" />
-                    Classify New
-                  </Button>
-                </div>
+                <div className="flex items-center gap-2"></div>
               </div>
 
               <Tabview />
             </div>
             <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <PieChart className="h-5 w-5" />
-                    Topic Distribution
-                  </CardTitle>
-                  <CardDescription>
-                    Classification breakdown by topic
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <TopicDistribution />
-                </CardContent>
-              </Card>
+              <PieChartComponent />
+
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">

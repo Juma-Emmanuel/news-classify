@@ -1,9 +1,25 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-
+import { useArticles } from "../../data/repos/articles";
+import PieChartComponent from "../ui_components/pie_chart";
 export default function TopicDistribution() {
   const canvasRef = useRef(null);
+  const { articles, categories } = useArticles();
+  const total2 = articles.length;
+
+  const categoryCounts = articles.reduce((acc, article) => {
+    const category = article.category;
+    acc[category] = (acc[category] || 0) + 1;
+    return acc;
+  }, {});
+
+  const data = Object.entries(categoryCounts).map(([category, count]) => ({
+    label: category,
+    value: ((count / total2) * 100).toFixed(2), // value as a percentage string, e.g., "33.33"
+  }));
+  console.log("categoryData", data);
+  const total = data.reduce((sum, item) => sum + item.value, 0);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -20,7 +36,6 @@ export default function TopicDistribution() {
       { label: "Entertainment", value: 16, color: "#0ea5e9" },
     ];
 
-    // Calculate total
     const total = data.reduce((sum, item) => sum + item.value, 0);
 
     // Set canvas dimensions
@@ -32,6 +47,7 @@ export default function TopicDistribution() {
     let startAngle = 0;
 
     data.forEach((item) => {
+      // categoryData.forEach((item) => {
       // Calculate the angle for this slice
       const sliceAngle = (item.value / total) * 2 * Math.PI;
 
@@ -48,7 +64,9 @@ export default function TopicDistribution() {
       ctx.closePath();
 
       // Fill with the slice color
-      ctx.fillStyle = item.color;
+      ctx.fillStyle =
+        // "#f43f5e";
+        item.color;
       ctx.fill();
 
       // Update the starting angle for the next slice
