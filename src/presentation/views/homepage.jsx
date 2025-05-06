@@ -33,6 +33,7 @@ import ArticleList from "../data_components/article-list";
 import RecentArticles from "../data_components/recent-articles";
 import ArticleUploadModal from "../ui_components/article_upload";
 import Tabview from "../ui_components/tab_view";
+import SearchView from "../ui_components/search_view";
 export default function HomePage() {
   const [showModal, setShowModal] = useState(false);
   return (
@@ -43,14 +44,8 @@ export default function HomePage() {
             <Newspaper className="h-6 w-6" />
             <h1 className="text-xl font-bold">NewsClassify</h1>
           </div>
-          <div className="relative w-full max-w-sm px-4">
-            <Search className="absolute left-6 top-3 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search articles..."
-              className="w-full pl-10 md:w-[300px] lg:w-[400px]"
-            />
-          </div>
+          <SearchView />
+
           <nav className="flex items-center gap-4">
             <div className="relative">
               <button
@@ -86,30 +81,7 @@ export default function HomePage() {
                   </Button>
                 </div>
               </div>
-              {/* <Tabs defaultValue="all" className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <TabsList>
-                    <TabsTrigger value="all">All Articles</TabsTrigger>
-                    <TabsTrigger value="unclassified">Unclassified</TabsTrigger>
-                    <TabsTrigger value="classified">Classified</TabsTrigger>
-                  </TabsList>
-                  <div className="flex items-center gap-2">
-                    <Button variant="outline" size="sm">
-                      <BarChart3 className="mr-2 h-4 w-4" />
-                      View as Chart
-                    </Button>
-                  </div>
-                </div>
-                <TabsContent value="all" className="space-y-4">
-                  <ArticleList filter="all" />
-                </TabsContent>
-                <TabsContent value="all" className="space-y-4">
-                  <ArticleList filter="unclassified" />
-                </TabsContent>
-                <TabsContent value="classified" className="space-y-4">
-                  <ArticleList filter="classified" />
-                </TabsContent>
-              </Tabs> */}
+
               <Tabview />
             </div>
             <div className="space-y-6">
